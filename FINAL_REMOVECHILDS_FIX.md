@@ -165,7 +165,7 @@ open http://localhost:3000
 ### **Automated Testing**
 ```bash
 # Run stability test
-./test-stability.sh
+./tests/test-stability.sh
 
 # Expected results:
 # - Backend: 100% success rate
