@@ -1,0 +1,2937 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v2/blockchain/{chain}": {
+      "get": {
+        "operationId": "ChainController_getChainDescription",
+        "summary": "Retrieve information about a specific blockchain.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chain description",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChainDescription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Blockchain"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/blockchain": {
+      "get": {
+        "operationId": "ChainController_getChainList",
+        "summary": "Fetch information about all supported blockchains.",
+        "parameters": [
+          {
+            "name": "sort",
+            "required": true,
+            "in": "query",
+            "description": "Sorting type",
+            "examples": {
+              "name": {
+                "value": "name"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": true,
+            "in": "query",
+            "description": "Sorting order",
+            "examples": {
+              "asc": {
+                "value": "asc"
+              },
+              "desc": {
+                "value": "desc"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number, starting at 0",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "description": "Result count per page",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Blockchain description list",
+                  "allOf": [
+                    {
+                      "properties": {
+                        "totalPages": {
+                          "type": "number",
+                          "description": "Total number of pages"
+                        },
+                        "page": {
+                          "type": "number",
+                          "description": "Current page"
+                        },
+                        "pageSize": {
+                          "type": "number",
+                          "description": "Page size"
+                        },
+                        "results": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ChainDescription"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Blockchain"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/blockchain/{chain}/swaps/blocks/latest": {
+      "get": {
+        "operationId": "ChainController_getChainLastBlock",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Blockchain"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/blockchain/{chain}/swaps/blocks": {
+      "get": {
+        "operationId": "ChainController_getChainSwapsBlocks",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChainSwap"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Blockchain"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/dex/{chain}/{factoryAddress}": {
+      "get": {
+        "operationId": "ExchangeController_getExchangeDescription",
+        "summary": "Get details of a specific DEX factory on a particular blockchain.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "factoryAddress",
+            "required": true,
+            "in": "path",
+            "description": "Dex factory address",
+            "examples": {
+              "Sushiswap": {
+                "value": "0xc0aee478e3658e2610c5f7a4a2e1777ce9e4f2ac"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dex description",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExchangeDescription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Exchange"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/dex/{chain}": {
+      "get": {
+        "operationId": "ExchangeController_getExchangeList",
+        "summary": "Obtain information about all DEXs on a specified blockchain.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": true,
+            "in": "query",
+            "description": "Sorting type",
+            "examples": {
+              "name": {
+                "value": "name"
+              },
+              "tvl": {
+                "value": "tvl"
+              },
+              "pools": {
+                "value": "pools"
+              },
+              "creationBlock": {
+                "value": "creationBlock"
+              },
+              "volume24h": {
+                "value": "volume24h"
+              },
+              "swaps24h": {
+                "value": "swaps24h"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": true,
+            "in": "query",
+            "description": "Sorting order",
+            "examples": {
+              "asc": {
+                "value": "asc"
+              },
+              "desc": {
+                "value": "desc"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number, starting at 0",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "description": "Result count per page",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Dex description list",
+                  "allOf": [
+                    {
+                      "properties": {
+                        "totalPages": {
+                          "type": "number",
+                          "description": "Total number of pages"
+                        },
+                        "page": {
+                          "type": "number",
+                          "description": "Current page"
+                        },
+                        "pageSize": {
+                          "type": "number",
+                          "description": "Page size"
+                        },
+                        "results": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ExchangeDescription"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Exchange"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/pool/{chain}/{address}": {
+      "get": {
+        "operationId": "PoolController_getPoolDescription",
+        "summary": "Fetch details of a specific liquidity pool on a particular blockchain.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Pool address",
+            "examples": {
+              "DEXT/WETH": {
+                "value": "0xa29fe6ef9592b5d408cca961d0fb9b1faf497d6d"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns queried pool description",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoolDescription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Pool"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/pool/{chain}/{address}/liquidity": {
+      "get": {
+        "operationId": "PoolController_getPoolLiquidity",
+        "summary": "Retrieve liquidity information of a specific pool.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Pool address",
+            "examples": {
+              "DEXT/WETH": {
+                "value": "0xa29fe6ef9592b5d408cca961d0fb9b1faf497d6d"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pool liquidity info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoolLiquidity"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Pool"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/pool/{chain}/{address}/score": {
+      "get": {
+        "operationId": "PoolController_getPoolScore",
+        "summary": "Get the score of a specific liquidity pool.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Pool address",
+            "examples": {
+              "DEXT/WETH": {
+                "value": "0xa29fe6ef9592b5d408cca961d0fb9b1faf497d6d"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pool score info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoolScore"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Pool"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/pool/{chain}/{address}/price": {
+      "get": {
+        "operationId": "PoolController_getPoolPrice",
+        "summary": "Fetch price information of a specific liquidity pool.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Pool address",
+            "examples": {
+              "DEXT/WETH": {
+                "value": "0xa29fe6ef9592b5d408cca961d0fb9b1faf497d6d"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pool price info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoolPrice"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Pool"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/pool/{chain}/{address}/locks": {
+      "get": {
+        "operationId": "PoolController_getPoolLocks",
+        "summary": "Fetch locks information of a specific liquidity pool.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Pool address",
+            "examples": {
+              "DEXT/WETH": {
+                "value": "0xa29fe6ef9592b5d408cca961d0fb9b1faf497d6d"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pool locks info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoolLocks"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Pool"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/pool/{chain}": {
+      "get": {
+        "operationId": "PoolController_getPoolList",
+        "summary": "Obtain information about all liquidity pools on a specified blockchain.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": true,
+            "in": "query",
+            "description": "Sorting type",
+            "examples": {
+              "creationTime": {
+                "value": "creationTime"
+              },
+              "creationBlock": {
+                "value": "creationBlock"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": true,
+            "in": "query",
+            "description": "Sorting order",
+            "examples": {
+              "asc": {
+                "value": "asc"
+              },
+              "desc": {
+                "value": "desc"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "description": "From filter, for date sort filter type (creationTime) must be in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSSXXX), for number based sort filter (creationBlock) type must be a number",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "examples": {
+              "Date": {
+                "value": "2023-10-01T00:00:00.000Z"
+              },
+              "Number": {
+                "value": 18570000
+              }
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "description": "To filter, for date sort filter type (creationTime) must be in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSSXXX), for number based sort filter (creationBlock) type must be a number",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "examples": {
+              "Date": {
+                "value": "2023-11-01T00:00:00.000Z"
+              },
+              "Number": {
+                "value": 18570500
+              }
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number, starting at 0",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "description": "Result count per page",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Pool list description list",
+                  "allOf": [
+                    {
+                      "properties": {
+                        "totalPages": {
+                          "type": "number",
+                          "description": "Total number of pages"
+                        },
+                        "page": {
+                          "type": "number",
+                          "description": "Current page"
+                        },
+                        "pageSize": {
+                          "type": "number",
+                          "description": "Page size"
+                        },
+                        "results": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/PoolDescription"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Pool"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/token/{chain}/{address}": {
+      "get": {
+        "operationId": "TokenController_getToken",
+        "summary": "Retrieve details of a specific token on a particular blockchain.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Token address",
+            "examples": {
+              "DEXT": {
+                "value": "0xfb7b4564402e5500db5bb6d63ae671302777c75a"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token description",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenDescription"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Token"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/token/{chain}/{address}/locks": {
+      "get": {
+        "operationId": "TokenController_getTokenLocks",
+        "summary": "Get lock information of a specific token.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Token address",
+            "examples": {
+              "DEXT": {
+                "value": "0xfb7b4564402e5500db5bb6d63ae671302777c75a"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token locks info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenLocks"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Token"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/token/{chain}/{address}/score": {
+      "get": {
+        "operationId": "TokenController_getTokenScore",
+        "summary": "Fetch the score of a specific token.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Token address",
+            "examples": {
+              "DEXT": {
+                "value": "0xfb7b4564402e5500db5bb6d63ae671302777c75a"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token score info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenScore"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Token"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/token/{chain}/{address}/info": {
+      "get": {
+        "operationId": "TokenController_getTokenFinancialInfo",
+        "summary": "Obtain additional information about a specific token.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Token address",
+            "examples": {
+              "DEXT": {
+                "value": "0xfb7b4564402e5500db5bb6d63ae671302777c75a"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token financial info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenFinancialInfo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Token"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/token/{chain}/{address}/price": {
+      "get": {
+        "operationId": "TokenController_getTokenPrice",
+        "summary": "Retrieve price information of a specific token.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Token address",
+            "examples": {
+              "DEXT": {
+                "value": "0xfb7b4564402e5500db5bb6d63ae671302777c75a"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token price info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenPrice"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Token"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/token/{chain}/{address}/audit": {
+      "get": {
+        "operationId": "TokenController_getTokenAudit",
+        "summary": "Retrieve audit information of a specific token.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Token address",
+            "examples": {
+              "DEXT": {
+                "value": "0xfb7b4564402e5500db5bb6d63ae671302777c75a"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token audit info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenAudit"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Token"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/token/{chain}": {
+      "get": {
+        "operationId": "TokenController_getTokenList",
+        "summary": "Get information about all tokens on a specified blockchain.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": true,
+            "in": "query",
+            "description": "Sorting type",
+            "examples": {
+              "socialsInfoUpdated": {
+                "value": "socialsInfoUpdated"
+              },
+              "creationTime": {
+                "value": "creationTime"
+              },
+              "creationBlock": {
+                "value": "creationBlock"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": true,
+            "in": "query",
+            "description": "Sorting order",
+            "examples": {
+              "asc": {
+                "value": "asc"
+              },
+              "desc": {
+                "value": "desc"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "description": "From filter, for date sort filter type (socialsInfoUpdated, creationTime) must be in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSSXXX), for number based sort filter type (creationBlock) must be a number",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "examples": {
+              "Date": {
+                "value": "2023-10-01T00:00:00.000Z"
+              },
+              "Number": {
+                "value": 18570000
+              }
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "description": "To filter, for date sort filter type (socialsInfoUpdated, creationTime) must be in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSSXXX), for number based sort filter type (creationBlock) must be a number",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "examples": {
+              "Date": {
+                "value": "2023-11-01T00:00:00.000Z"
+              },
+              "Number": {
+                "value": 18570500
+              }
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number, starting at 0",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "description": "Result count per page",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Token description list",
+                  "allOf": [
+                    {
+                      "properties": {
+                        "totalPages": {
+                          "type": "number",
+                          "description": "Total number of pages"
+                        },
+                        "page": {
+                          "type": "number",
+                          "description": "Current page"
+                        },
+                        "pageSize": {
+                          "type": "number",
+                          "description": "Page size"
+                        },
+                        "results": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/TokenDescription"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Token"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/token/{chain}/{address}/pools": {
+      "get": {
+        "operationId": "TokenController_getTokenPools",
+        "summary": "Fetch information about all liquidity pools associated with a specific token.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "address",
+            "required": true,
+            "in": "path",
+            "description": "Token address",
+            "examples": {
+              "DEXT": {
+                "value": "0xfb7b4564402e5500db5bb6d63ae671302777c75a"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sort",
+            "required": true,
+            "in": "query",
+            "description": "Sorting type",
+            "examples": {
+              "creationTime": {
+                "value": "creationTime"
+              },
+              "creationBlock": {
+                "value": "creationBlock"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "order",
+            "required": true,
+            "in": "query",
+            "description": "Sorting order",
+            "examples": {
+              "asc": {
+                "value": "asc"
+              },
+              "desc": {
+                "value": "desc"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "required": true,
+            "in": "query",
+            "description": "From filter, for date sort filter type (creationTime) must be in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSSXXX), for number based sort filter type (creationBlock) must be a number",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "examples": {
+              "Date": {
+                "value": "2023-10-01T00:00:00.000Z"
+              },
+              "Number": {
+                "value": 18570000
+              }
+            }
+          },
+          {
+            "name": "to",
+            "required": true,
+            "in": "query",
+            "description": "To filter, for date sort filter type (creationTime) must be in ISO format (yyyy-MM-dd'T'HH:mm:ss.SSSXXX), for number based sort filter type (creationBlock) must be a number",
+            "schema": {
+              "oneOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "examples": {
+              "Date": {
+                "value": "2023-11-01T00:00:00.000Z"
+              },
+              "Number": {
+                "value": 18570500
+              }
+            }
+          },
+          {
+            "name": "page",
+            "required": false,
+            "in": "query",
+            "description": "Page number, starting at 0",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "required": false,
+            "in": "query",
+            "description": "Result count per page",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "Token pools description list",
+                  "allOf": [
+                    {
+                      "properties": {
+                        "totalPages": {
+                          "type": "number",
+                          "description": "Total number of pages"
+                        },
+                        "page": {
+                          "type": "number",
+                          "description": "Current page"
+                        },
+                        "pageSize": {
+                          "type": "number",
+                          "description": "Page size"
+                        },
+                        "results": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/TokenPool"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Token"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/ranking/{chain}/hotpools": {
+      "get": {
+        "operationId": "RankingController_getHotPools",
+        "summary": "Retrieve a list of hot liquidity pools on a particular blockchain.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pools description list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RankedPool"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Ranking"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/ranking/{chain}/gainers": {
+      "get": {
+        "operationId": "RankingController_getGainers",
+        "summary": "Get a list of tokens that have gained the most in value.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pools description list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GainersLosersPool"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Ranking"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    },
+    "/v2/ranking/{chain}/losers": {
+      "get": {
+        "operationId": "RankingController_getLosers",
+        "summary": "Fetch a list of tokens that have lost the most in value.",
+        "parameters": [
+          {
+            "name": "chain",
+            "required": true,
+            "in": "path",
+            "description": "Chain id",
+            "examples": {
+              "Ethereum": {
+                "value": "ether"
+              }
+            },
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pools description list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GainersLosersPool"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Query parameter missing"
+          },
+          "403": {
+            "description": "Missing or invalid authorization header"
+          },
+          "429": {
+            "description": "Client has surpassed rate limit"
+          }
+        },
+        "tags": [
+          "Ranking"
+        ],
+        "security": [
+          {
+            "Api-Key": []
+          }
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "DEXTools API",
+    "description": "<p>Welcome to <a href='https://www.dextools.io'>DEXTools</a> API: the gateway to DeFi</p><p>Seize the power of exhaustive data, and craft market strategies that lead, not follow. Let's redefine crypto trading, together.</p><ul><li>Subscribe and get your API key in our <a href='https://developer.dextools.io'>website</a></li><li>Available real-time DeFi data for +80 blockchains, +10K DEX’s and +2M tokens and liquidity pools.</li><li>Query DEXTools' exclusive HotPairs ranking and tokens social information.</li><li>Pay with crypto available, contact us by <a href='mailto:developer@dextools.io'>email</a>.</li><li>For support please contact to our <a href='https://t.me/DEXToolsCommunity'>Telegram's Support Channel</a> or <a href='mailto:developer@dextools.io'>mail</a></li></ul>",
+    "version": "V2",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [
+    {
+      "url": "https://public-api.dextools.io/trial/",
+      "description": "Trial"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "Api-Key": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    },
+    "schemas": {
+      "ChainDescription": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Blockchain name"
+          },
+          "id": {
+            "type": "string",
+            "description": "Blockchain id"
+          },
+          "website": {
+            "type": "string",
+            "description": "Blockchain exchange count\nBlockchain tvl\nBlockchain token count\nBlockchain pool count\nBlockchain website"
+          }
+        },
+        "required": [
+          "name",
+          "id",
+          "website"
+        ]
+      },
+      "ChainSwap": {
+        "type": "object",
+        "properties": {}
+      },
+      "ExchangeDescription": {
+        "type": "object",
+        "properties": {
+          "factory": {
+            "type": "string",
+            "description": "Exhange factory address"
+          },
+          "name": {
+            "type": "string",
+            "description": "Exchange name"
+          },
+          "website": {
+            "type": "string",
+            "description": "Exchange website"
+          },
+          "pools": {
+            "type": "number",
+            "description": "Exchange pool count"
+          },
+          "volume24h": {
+            "type": "number",
+            "description": "Exchange tvl\nExchange accumulated volume in the last 24h"
+          },
+          "swaps24h": {
+            "type": "number",
+            "description": "Exchange swap count in the last 24h"
+          }
+        },
+        "required": [
+          "factory",
+          "name",
+          "website",
+          "pools",
+          "volume24h",
+          "swaps24h"
+        ]
+      },
+      "PoolToken": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Token address"
+          },
+          "symbol": {
+            "type": "string",
+            "description": "Token symbol"
+          },
+          "name": {
+            "type": "string",
+            "description": "Token name"
+          }
+        },
+        "required": [
+          "address",
+          "symbol",
+          "name"
+        ]
+      },
+      "PoolDescription": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Pool address"
+          },
+          "exchangeName": {
+            "type": "string",
+            "description": "Pool exchange"
+          },
+          "exchangeFactory": {
+            "type": "string",
+            "description": "Pool exchange factory"
+          },
+          "creationTime": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Pool creation time"
+          },
+          "creationBlock": {
+            "type": "number",
+            "description": "Block number of the pool creation"
+          },
+          "mainToken": {
+            "description": "Pool main token",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PoolToken"
+              }
+            ]
+          },
+          "sideToken": {
+            "description": "Pool side token",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PoolToken"
+              }
+            ]
+          },
+          "fee": {
+            "type": "number",
+            "description": "Pool fee percentage"
+          }
+        },
+        "required": [
+          "address",
+          "exchangeName",
+          "exchangeFactory",
+          "creationTime",
+          "creationBlock",
+          "mainToken",
+          "sideToken",
+          "fee"
+        ]
+      },
+      "PoolReserves": {
+        "type": "object",
+        "properties": {
+          "mainToken": {
+            "type": "number",
+            "description": "Main token reserves"
+          },
+          "sideToken": {
+            "type": "number",
+            "description": "Side token reserves"
+          }
+        },
+        "required": [
+          "mainToken",
+          "sideToken"
+        ]
+      },
+      "PoolLiquidity": {
+        "type": "object",
+        "properties": {
+          "reserves": {
+            "$ref": "#/components/schemas/PoolReserves"
+          },
+          "liquidity": {
+            "type": "number",
+            "description": "Pool liquidity"
+          }
+        },
+        "required": [
+          "reserves",
+          "liquidity"
+        ]
+      },
+      "DextScore": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "number",
+            "description": "public information: number;\n    public pool: number;\n    public holders: number;\n    public transactions: number;\n    public creation: number;"
+          }
+        },
+        "required": [
+          "total"
+        ]
+      },
+      "Votes": {
+        "type": "object",
+        "properties": {
+          "upvotes": {
+            "type": "number"
+          },
+          "downvotes": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "upvotes",
+          "downvotes"
+        ]
+      },
+      "PoolScore": {
+        "type": "object",
+        "properties": {
+          "dextScore": {
+            "description": "Dextscore",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DextScore"
+              }
+            ]
+          },
+          "votes": {
+            "description": "Community votes",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Votes"
+              }
+            ]
+          }
+        },
+        "required": [
+          "dextScore",
+          "votes"
+        ]
+      },
+      "PoolPrice": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "description": "Main token current $ price"
+          },
+          "priceChain": {
+            "type": "number",
+            "description": "Main token current price in blockchain native token"
+          },
+          "price5m": {
+            "type": "number",
+            "description": "Main token $ price 5m ago"
+          },
+          "priceChain5m": {
+            "type": "number",
+            "description": "Main token price in blockchain native token 5m ago"
+          },
+          "volume5m": {
+            "type": "number",
+            "description": "Pool volume in last 5m"
+          },
+          "sells5m": {
+            "type": "number",
+            "description": "Main token sell count in last 5m"
+          },
+          "buys5m": {
+            "type": "number",
+            "description": "Main token buys in last 5m"
+          },
+          "sellVolume5m": {
+            "type": "number",
+            "description": "Main token sell volume in last 5m"
+          },
+          "buyVolume5m": {
+            "type": "number",
+            "description": "Main token buy volume in last 5m"
+          },
+          "variation5m": {
+            "type": "number",
+            "description": "Main token price variation percentage with price5m as reference"
+          },
+          "variationChain5m": {
+            "type": "number",
+            "description": "Main token priceChain variation percentage with priceChain5m as reference"
+          },
+          "price1h": {
+            "type": "number",
+            "description": "Main token $ price 1h ago"
+          },
+          "priceChain1h": {
+            "type": "number",
+            "description": "Main token price in blockchain native token 1h ago"
+          },
+          "volume1h": {
+            "type": "number",
+            "description": "Pool volume in last 1h"
+          },
+          "sells1h": {
+            "type": "number",
+            "description": "Main token sell count in last 1h"
+          },
+          "buys1h": {
+            "type": "number",
+            "description": "Main token buys in last 1h"
+          },
+          "sellVolume1h": {
+            "type": "number",
+            "description": "Main token sell volume in last 1h"
+          },
+          "buyVolume1h": {
+            "type": "number",
+            "description": "Main token buy volume in last 1h"
+          },
+          "variation1h": {
+            "type": "number",
+            "description": "Main token price variation percentage with price1h as reference"
+          },
+          "variationChain1h": {
+            "type": "number",
+            "description": "Main token priceChain variation percentage with priceChain1h as reference"
+          },
+          "price6h": {
+            "type": "number",
+            "description": "Main token $ price 6h ago"
+          },
+          "priceChain6h": {
+            "type": "number",
+            "description": "Main token price in blockchain native token 6h ago"
+          },
+          "volume6h": {
+            "type": "number",
+            "description": "Pool volume in last 6h"
+          },
+          "sells6h": {
+            "type": "number",
+            "description": "Main token sell count in last 6h"
+          },
+          "buys6h": {
+            "type": "number",
+            "description": "Main token buys in last 6h"
+          },
+          "sellVolume6h": {
+            "type": "number",
+            "description": "Main token sell volume in last 6h"
+          },
+          "buyVolume6h": {
+            "type": "number",
+            "description": "Main token buy volume in last 6h"
+          },
+          "variation6h": {
+            "type": "number",
+            "description": "Main token price variation percentage with price6h as reference"
+          },
+          "variationChain6h": {
+            "type": "number",
+            "description": "Main token priceChain variation percentage with priceChain6h as reference"
+          },
+          "price24h": {
+            "type": "number",
+            "description": "Main token $ price 24h ago"
+          },
+          "priceChain24h": {
+            "type": "number",
+            "description": "Main token price in blockchain native token 24h ago"
+          },
+          "volume24h": {
+            "type": "number",
+            "description": "Pool volume in last 24h"
+          },
+          "sells24h": {
+            "type": "number",
+            "description": "Main token sell count in last 24h"
+          },
+          "buys24h": {
+            "type": "number",
+            "description": "Main token buys in last 24h"
+          },
+          "sellVolume24h": {
+            "type": "number",
+            "description": "Main token sell volume in last 24h"
+          },
+          "buyVolume24h": {
+            "type": "number",
+            "description": "Main token buy volume in last 24h"
+          },
+          "variation24h": {
+            "type": "number",
+            "description": "Main token price variation percentage with price24h as reference"
+          },
+          "variationChain24h": {
+            "type": "number",
+            "description": "Main token priceChain variation percentage with priceChain24h as reference"
+          }
+        },
+        "required": [
+          "price",
+          "priceChain",
+          "price5m",
+          "priceChain5m",
+          "volume5m",
+          "sells5m",
+          "buys5m",
+          "sellVolume5m",
+          "buyVolume5m",
+          "variation5m",
+          "variationChain5m",
+          "price1h",
+          "priceChain1h",
+          "volume1h",
+          "sells1h",
+          "buys1h",
+          "sellVolume1h",
+          "buyVolume1h",
+          "variation1h",
+          "variationChain1h",
+          "price6h",
+          "priceChain6h",
+          "volume6h",
+          "sells6h",
+          "buys6h",
+          "sellVolume6h",
+          "buyVolume6h",
+          "variation6h",
+          "variationChain6h",
+          "price24h",
+          "priceChain24h",
+          "volume24h",
+          "sells24h",
+          "buys24h",
+          "sellVolume24h",
+          "buyVolume24h",
+          "variation24h",
+          "variationChain24h"
+        ]
+      },
+      "PoolLock": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "Lock provider"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Pool amount locked"
+          },
+          "lockDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Lock date"
+          },
+          "unlockDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Unlock date"
+          }
+        },
+        "required": [
+          "unlockDate"
+        ]
+      },
+      "PoolLocks": {
+        "type": "object",
+        "properties": {
+          "amountLocked": {
+            "type": "number",
+            "description": "Total pool lock amount"
+          },
+          "nextUnlock": {
+            "description": "Next pool unlock",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PoolLock"
+              }
+            ]
+          },
+          "locks": {
+            "description": "Pool locks list",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PoolLock"
+            }
+          }
+        },
+        "required": [
+          "amountLocked"
+        ]
+      },
+      "TokenDescription": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "token address"
+          },
+          "name": {
+            "type": "string",
+            "description": "Token name"
+          },
+          "symbol": {
+            "type": "string",
+            "description": "token symbol"
+          },
+          "logo": {
+            "type": "string",
+            "description": "Token logo url"
+          },
+          "description": {
+            "type": "string",
+            "description": "Token description"
+          },
+          "decimals": {
+            "type": "number",
+            "description": "token decimals"
+          },
+          "socialInfo": {
+            "type": "object",
+            "properties": {
+              "email": {
+                "required": true,
+                "type": "string"
+              },
+              "discord": {
+                "required": true,
+                "type": "string"
+              },
+              "facebook": {
+                "required": true,
+                "type": "string"
+              },
+              "linkedin": {
+                "required": true,
+                "type": "string"
+              },
+              "reddit": {
+                "required": true,
+                "type": "string"
+              },
+              "slack": {
+                "required": true,
+                "type": "string"
+              },
+              "telegram": {
+                "required": true,
+                "type": "string"
+              },
+              "twitter": {
+                "required": true,
+                "type": "string"
+              },
+              "website": {
+                "required": true,
+                "type": "string"
+              },
+              "github": {
+                "required": true,
+                "type": "string"
+              },
+              "bitbucket": {
+                "required": true,
+                "type": "string"
+              },
+              "instagram": {
+                "required": true,
+                "type": "string"
+              },
+              "medium": {
+                "required": true,
+                "type": "string"
+              },
+              "tiktok": {
+                "required": true,
+                "type": "string"
+              },
+              "youtube": {
+                "required": true,
+                "type": "string"
+              }
+            }
+          },
+          "creationTime": {
+            "format": "date-time",
+            "type": "string",
+            "description": "token creation date"
+          },
+          "creationBlock": {
+            "type": "number",
+            "description": "Block number the token was created"
+          }
+        },
+        "required": [
+          "address",
+          "name",
+          "symbol",
+          "logo",
+          "description",
+          "decimals",
+          "socialInfo",
+          "creationTime",
+          "creationBlock"
+        ]
+      },
+      "TokenLock": {
+        "type": "object",
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "Lock provider"
+          },
+          "amount": {
+            "type": "number",
+            "description": "Token amount locked"
+          },
+          "lockDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Lock date"
+          },
+          "unlockDate": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Unlock date"
+          }
+        },
+        "required": [
+          "unlockDate"
+        ]
+      },
+      "TokenLocks": {
+        "type": "object",
+        "properties": {
+          "amountLocked": {
+            "type": "number",
+            "description": "Total token lock amount"
+          },
+          "nextUnlock": {
+            "description": "Next token unlock",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenLock"
+              }
+            ]
+          },
+          "locks": {
+            "description": "Token locks list",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TokenLock"
+            }
+          }
+        },
+        "required": [
+          "amountLocked"
+        ]
+      },
+      "TokenScore": {
+        "type": "object",
+        "properties": {
+          "dextScore": {
+            "description": "Dextscore",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DextScore"
+              }
+            ]
+          },
+          "votes": {
+            "description": "Community votes",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Votes"
+              }
+            ]
+          }
+        },
+        "required": [
+          "dextScore",
+          "votes"
+        ]
+      },
+      "TokenFinancialInfo": {
+        "type": "object",
+        "properties": {
+          "circulatingSupply": {
+            "type": "number",
+            "description": "Token circulating supply"
+          },
+          "totalSupply": {
+            "type": "number",
+            "description": "Token total supply"
+          },
+          "mcap": {
+            "type": "number",
+            "description": "Token market cap"
+          },
+          "fdv": {
+            "type": "number",
+            "description": "Token fully diluted volume"
+          },
+          "holders": {
+            "type": "number",
+            "description": "Token holder count"
+          },
+          "transactions": {
+            "type": "number",
+            "description": "Token transaction count"
+          }
+        },
+        "required": [
+          "circulatingSupply",
+          "totalSupply",
+          "mcap",
+          "fdv",
+          "holders",
+          "transactions"
+        ]
+      },
+      "TokenPrice": {
+        "type": "object",
+        "properties": {
+          "price": {
+            "type": "number",
+            "description": "Token current $ price"
+          },
+          "priceChain": {
+            "type": "number",
+            "description": "Token current price in blockchain native token"
+          },
+          "price5m": {
+            "type": "number",
+            "description": "Token $ price 5m ago"
+          },
+          "priceChain5m": {
+            "type": "number",
+            "description": "Token price in blockchain native token 5m ago"
+          },
+          "variation5m": {
+            "type": "number",
+            "description": "Token price variation percentage with price5m as reference"
+          },
+          "price1h": {
+            "type": "number",
+            "description": "Token $ price 1h ago"
+          },
+          "priceChain1h": {
+            "type": "number",
+            "description": "Token price in blockchain native token 1h ago"
+          },
+          "variation1h": {
+            "type": "number",
+            "description": "Token price variation percentage with price1h as reference"
+          },
+          "price6h": {
+            "type": "number",
+            "description": "Token $ price 6h ago"
+          },
+          "priceChain6h": {
+            "type": "number",
+            "description": "Token price in blockchain native token 6h ago"
+          },
+          "variation6h": {
+            "type": "number",
+            "description": "Token price variation percentage with price6h as reference"
+          },
+          "price24h": {
+            "type": "number",
+            "description": "Token $ price 24h ago"
+          },
+          "priceChain24h": {
+            "type": "number",
+            "description": "Token price in blockchain native token 24h ago"
+          },
+          "variation24h": {
+            "type": "number",
+            "description": "Token price variation percentage with price24h as reference"
+          }
+        },
+        "required": [
+          "price",
+          "priceChain",
+          "price5m",
+          "priceChain5m",
+          "variation5m",
+          "price1h",
+          "priceChain1h",
+          "variation1h",
+          "price6h",
+          "priceChain6h",
+          "variation6h",
+          "price24h",
+          "priceChain24h",
+          "variation24h"
+        ]
+      },
+      "TokenAuditTax": {
+        "type": "object",
+        "properties": {
+          "min": {
+            "type": "number",
+            "description": "Min tax"
+          },
+          "max": {
+            "type": "number",
+            "description": "Max tax"
+          },
+          "status": {
+            "type": "string",
+            "description": "Tax status"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "TokenAudit": {
+        "type": "object",
+        "properties": {
+          "isOpenSource": {
+            "type": "string",
+            "description": "contract is open source"
+          },
+          "isHoneypot": {
+            "type": "string",
+            "description": "Is a honeypot"
+          },
+          "isMintable": {
+            "type": "string",
+            "description": "Token is mintable"
+          },
+          "isProxy": {
+            "type": "string",
+            "description": "Token is behind a proxy"
+          },
+          "slippageModifiable": {
+            "type": "string",
+            "description": "Slippage is modifiable"
+          },
+          "isBlacklisted": {
+            "type": "string",
+            "description": "Token has blacklist support"
+          },
+          "sellTax": {
+            "description": "Sell tax",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenAuditTax"
+              }
+            ]
+          },
+          "buyTax": {
+            "description": "Buy tax",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/TokenAuditTax"
+              }
+            ]
+          },
+          "isContractRenounced": {
+            "type": "string",
+            "description": "Token contract is renounced for further modification"
+          },
+          "isPotentiallyScam": {
+            "type": "string",
+            "description": "Token is potentially a scam"
+          },
+          "updatedAt": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Audit update date"
+          }
+        },
+        "required": [
+          "isOpenSource",
+          "isHoneypot",
+          "isMintable",
+          "isProxy",
+          "slippageModifiable",
+          "isBlacklisted",
+          "sellTax",
+          "buyTax",
+          "isContractRenounced",
+          "isPotentiallyScam",
+          "updatedAt"
+        ]
+      },
+      "TokenPool": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Pool address"
+          },
+          "exchangeName": {
+            "type": "string",
+            "description": "Pool exchange"
+          },
+          "exchangeFactory": {
+            "type": "string",
+            "description": "Pool exchange factory"
+          },
+          "creationTime": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Pool creation time"
+          },
+          "creationBlock": {
+            "type": "number",
+            "description": "Block number of the pool creation"
+          },
+          "mainToken": {
+            "description": "Pool main token",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PoolToken"
+              }
+            ]
+          },
+          "sideToken": {
+            "description": "Pool side token",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PoolToken"
+              }
+            ]
+          },
+          "fee": {
+            "type": "number",
+            "description": "Pool fee percentage"
+          }
+        },
+        "required": [
+          "address",
+          "exchangeName",
+          "exchangeFactory",
+          "creationTime",
+          "creationBlock",
+          "mainToken",
+          "sideToken",
+          "fee"
+        ]
+      },
+      "RankedPool": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Pool address"
+          },
+          "exchangeName": {
+            "type": "string",
+            "description": "Pool exchange"
+          },
+          "exchangeFactory": {
+            "type": "string",
+            "description": "Pool exchange factory"
+          },
+          "creationTime": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Pool creation time"
+          },
+          "creationBlock": {
+            "type": "number",
+            "description": "Block number of the pool creation"
+          },
+          "mainToken": {
+            "description": "Pool main token",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PoolToken"
+              }
+            ]
+          },
+          "sideToken": {
+            "description": "Pool side token",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PoolToken"
+              }
+            ]
+          },
+          "fee": {
+            "type": "number",
+            "description": "Pool fee percentage"
+          },
+          "rank": {
+            "type": "number",
+            "description": "Pool rank"
+          }
+        },
+        "required": [
+          "address",
+          "exchangeName",
+          "exchangeFactory",
+          "creationTime",
+          "creationBlock",
+          "mainToken",
+          "sideToken",
+          "fee",
+          "rank"
+        ]
+      },
+      "GainersLosersPool": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Pool address"
+          },
+          "exchangeName": {
+            "type": "string",
+            "description": "Pool exchange"
+          },
+          "exchangeFactory": {
+            "type": "string",
+            "description": "Pool exchange factory"
+          },
+          "creationTime": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Pool creation time"
+          },
+          "creationBlock": {
+            "type": "number",
+            "description": "Block number of the pool creation"
+          },
+          "mainToken": {
+            "description": "Pool main token",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PoolToken"
+              }
+            ]
+          },
+          "sideToken": {
+            "description": "Pool side token",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PoolToken"
+              }
+            ]
+          },
+          "fee": {
+            "type": "number",
+            "description": "Pool fee percentage"
+          },
+          "rank": {
+            "type": "number",
+            "description": "Pool rank"
+          },
+          "price": {
+            "type": "number"
+          },
+          "price24h": {
+            "type": "number"
+          },
+          "variation24h": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "address",
+          "exchangeName",
+          "exchangeFactory",
+          "creationTime",
+          "creationBlock",
+          "mainToken",
+          "sideToken",
+          "fee",
+          "rank",
+          "price",
+          "price24h",
+          "variation24h"
+        ]
+      }
+    }
+  }
+}

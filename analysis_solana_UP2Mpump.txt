@@ -1,0 +1,21 @@
+Análise DEXTools - SOLANA - egy3LC9ndbxo8LzL8W3s8FzwS3H6gT7t73uUP2Mpump
+============================================================
+
+SEGURANÇA:
+  ✅ Token Score: 85/100 — Boa reputação
+  🔓 Liquidez NÃO bloqueada — RISCO DE RUG PULL!
+  🕵️‍♂️ Token SEM AUDITORIA — Cuidado com contratos maliciosos!
+  👥 Total holders: 299 (dados detalhados não disponíveis)
+  ⚠️ Token com ZERO transações — pode ser inativo ou muito novo
+
+MÉTRICAS:
+  Preço: $0.00005307
+  Variação 24h: 395.16%
+  Market Cap: $53,018.22
+  Liquidez: $0.00
+  Volume 24h: $0.00
+  Holders: 299
+
+TENDÊNCIA: 📈 Forte alta (+395.16% 24h)
+
+HOLDERS: 299

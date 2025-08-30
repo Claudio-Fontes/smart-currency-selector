@@ -1,0 +1,53 @@
+HOT POOLS - ETHER - 5 pools
+============================================================
+
+# 1 - Nairo/WETH
+Pool: 0x16974e18178e1a8ab848bc2ab296626cf95d2885
+DEX: Uniswap V2
+Rank: 1
+Main Token: Nairo (Nairo)
+Side Token: Wrapped Ether (WETH)
+Fee: 0%
+Criado em: 2025-08-29T15:46:23
+----------------------------------------
+
+# 2 - MANYU/WETH
+Pool: 0xc4704f13d5e08b27b039d53873e813dd2fad99d9
+DEX: Uniswap V2
+Rank: 2
+Main Token: Manyu (MANYU)
+Side Token: Wrapped Ether (WETH)
+Fee: 0%
+Criado em: 2025-07-01T18:40:23
+----------------------------------------
+
+# 3 - PEPE/WETH
+Pool: 0xa43fe16908251ee70ef74718545e4fe6c5ccec9f
+DEX: Uniswap V2
+Rank: 3
+Main Token: Pepe (PEPE)
+Side Token: Wrapped Ether (WETH)
+Fee: 0%
+Criado em: 2023-04-14T17:21:11
+----------------------------------------
+
+# 4 - Block/USD1
+Pool: 0xdabc816b691c8c2135f087a32eeb09a3f548938e
+DEX: Uniswap V2
+Rank: 4
+Main Token: Block (Block)
+Side Token: World Liberty Financial USD (USD1)
+Fee: 0%
+Criado em: 2025-07-14T15:51:47
+----------------------------------------
+
+# 5 - TRWA/WETH
+Pool: 0xd9848413a0569359e4a1a7adce7d270badc6c3e9
+DEX: Uniswap V2
+Rank: 5
+Main Token: TRWA (TRWA)
+Side Token: Wrapped Ether (WETH)
+Fee: 0%
+Criado em: 2025-07-01T12:14:47
+----------------------------------------
+

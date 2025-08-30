@@ -1,0 +1,303 @@
+HOT POOLS - SOLANA - 30 pools
+============================================================
+
+# 1 - TROLL/SOL
+Pool: 4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama
+DEX: PumpSwap
+Rank: 1
+Main Token: TROLL (TROLL)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-04-20T18:30:29
+----------------------------------------
+
+# 2 - SAROS/USDC
+Pool: 7EFmig3Jb9j1kJ7ppaUs5iY8P5pBnRdQXUR4q9vSCY37
+DEX: Saros
+Rank: 2
+Main Token: Saros (SAROS)
+Side Token: USD Coin (USDC)
+Fee: 0%
+Criado em: 2024-01-19T09:36:00
+----------------------------------------
+
+# 3 - BULL/SOL
+Pool: HGdsmCT5Tz2ySH2Pq8ezq2ibReXBBnniD6DqFYyPJBF7
+DEX: PumpSwap
+Rank: 3
+Main Token: Bullcoin (BULL)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-27T14:28:50
+----------------------------------------
+
+# 4 - jobless/SOL
+Pool: 7FpPLS7wyfi3Cd84TmfjacCaiqMHKoom546ozFS21wzr
+DEX: PumpSwap
+Rank: 4
+Main Token: jobless (jobless)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-25T13:39:01
+----------------------------------------
+
+# 5 - neet/SOL
+Pool: 5wNu5QhdpRGrL37ffcd6TMMqZugQgxwafgz477rShtHy
+DEX: PumpSwap
+Rank: 5
+Main Token: NotInEmploymentEducationTraining (neet)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-04-27T00:58:14
+----------------------------------------
+
+# 6 - GP/USDC
+Pool: 8NksD9NCdSDdfqAMtjuRS4TjAa6WD1XW1AQzeN15czVs
+DEX: Meteora DLMM
+Rank: 6
+Main Token: Graphite (GP)
+Side Token: USD Coin (USDC)
+Fee: 0%
+Criado em: 2025-05-23T00:05:24
+----------------------------------------
+
+# 7 - URANUS/USDC
+Pool: 7ccKzmrXBpFHwyZGPqPuKL6bEyWAETSnHwnWe3jEneVc
+DEX: Meteora DAMM V2
+Rank: 7
+Main Token: Uranus (URANUS)
+Side Token: USD Coin (USDC)
+Fee: 0%
+Criado em: 2025-07-03T04:20:24
+----------------------------------------
+
+# 8 - imperfect/SOL
+Pool: DNKGAJ7bmbXYvXo3s1FSwvX5HV4UyQhnzaAy3HbXXWP1
+DEX: PumpSwap
+Rank: 8
+Main Token: the imperfect coin (imperfect)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-19T11:50:15
+----------------------------------------
+
+# 9 - aura/SOL
+Pool: 9ViX1VductEoC2wERTSp2TuDxXPwAf69aeET8ENPJpsN
+DEX: Raydium
+Rank: 9
+Main Token: aura (aura)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2024-05-30T20:01:21
+----------------------------------------
+
+#10 - Bucky/SOL
+Pool: C7EUe5HAoerJU2dxnnLr7Mf1zF6YW3LWepUxphfYGLy1
+DEX: Raydium CPMM
+Rank: 10
+Main Token: Bucky (Bucky)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-07-29T06:06:43
+----------------------------------------
+
+#11 - LIGHT/SOL
+Pool: EkU9zGSkUnVVK6nhmPSqnxqcKPzt1PicrCjdxSbWo9uA
+DEX: Heaven
+Rank: 11
+Main Token: Light (LIGHT)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-12T11:35:39
+----------------------------------------
+
+#12 - Bonk/USDC
+Pool: GBMoNx84HsFdVK63t8BZuDgyZhSBaeKWB4pHHpoeRM9z
+DEX: Phoenix
+Rank: 12
+Main Token: Bonk (Bonk)
+Side Token: USD Coin (USDC)
+Fee: 0%
+Criado em: 2023-12-11T10:33:06
+----------------------------------------
+
+#13 - $COLLAT/SOL
+Pool: DeAWLtRGAqCW7imV1jSC9NZkRKKGStFC1U7eDFBRxryR
+DEX: Raydium
+Rank: 13
+Main Token: Collaterize ($COLLAT)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-01-30T20:45:43
+----------------------------------------
+
+#14 - jobcoin/SOL
+Pool: 8yzZgcvzk353JqUbTHeHUUA5kJhZb1EimJwCcXLCM4LH
+DEX: PumpSwap
+Rank: 14
+Main Token: buy instead of getting a job (jobcoin)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-04-14T22:15:32
+----------------------------------------
+
+#15 - flow/SOL
+Pool: 9WEiahk4KxZ3HGpPijbtBzcZqKWEerKc2dA78C44BVH2
+DEX: PumpSwap
+Rank: 15
+Main Token: flow state (flow)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-16T10:29:34
+----------------------------------------
+
+#16 - FAPGUY/SOL
+Pool: BwuH1mr39qw8ee9TM62Djs3hUhKDCqG2wtNRT9Xf5jyW
+DEX: PumpSwap
+Rank: 16
+Main Token: Troll's Brother (FAPGUY)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-25T10:55:53
+----------------------------------------
+
+#17 - ORANGE/SOL
+Pool: 4F13bWhNZKASiwMsGrKi8JJEfhcTaxb19qQuGo7pXRr2
+DEX: PumpSwap
+Rank: 17
+Main Token: The Orange Era (ORANGE)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-12T19:11:46
+----------------------------------------
+
+#18 - San/SOL
+Pool: 4BBvrWsocM9wY2qXCCufCL8GxKtNeXT73uNfveK4MMq7
+DEX: Raydium
+Rank: 18
+Main Token: San Chan (San)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2024-12-31T05:55:12
+----------------------------------------
+
+#19 - snail/SOL
+Pool: 5QcEDqaiTMbTmdzhPueEQQE6REomd7efGE4Wd3LsJT8j
+DEX: PumpSwap
+Rank: 19
+Main Token: a slow runner (snail)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-14T03:09:13
+----------------------------------------
+
+#20 - LLM/SOL
+Pool: C3xpiicYD15XZCjzEtVhGU7xx4NRnZrusmLbyHWpq4bh
+DEX: Meteora DAMM V2
+Rank: 20
+Main Token: Latina Language Model (LLM)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-23T12:35:53
+----------------------------------------
+
+#21 - USDUC/SOL
+Pool: BAX9M9a5FVy5cNiewwnuwkVDzhSg9psZnb4fJ9r677tN
+DEX: PumpSwap
+Rank: 21
+Main Token: unstable coin (USDUC)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-05-18T22:24:26
+----------------------------------------
+
+#22 - ANON/SOL
+Pool: 8eQTQLnBmEgeY9avVjrqqgX8ZVr8MRFrXEHpMrx6DGff
+DEX: Meteora DAMM V2
+Rank: 22
+Main Token: Anonymous Coin (ANON)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-15T01:26:45
+----------------------------------------
+
+#23 - shitcoin/SOL
+Pool: 8oopi6gVFh4FA1mL5Jj35yRetfpmWiUDTfhCv31gkA3v
+DEX: PumpSwap
+Rank: 23
+Main Token: just a shitcoin (shitcoin)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-26T12:02:49
+----------------------------------------
+
+#24 - CRM/SOL
+Pool: 6PNitzwJuMnZSVFyFejF9MiJzpC4iUqh1XUgfWvdF8WB
+DEX: Meteora DAMM V2
+Rank: 24
+Main Token: Crypto Rug Muncher (CRM)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-25T00:44:55
+----------------------------------------
+
+#25 - MOMO/SOL
+Pool: EPVwQEJCnenVSNYECMA2955BGTqJk2ptXuggrvtiFFG2
+DEX: Raydium CPMM
+Rank: 25
+Main Token: Momo (MOMO)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-07-07T21:43:55
+----------------------------------------
+
+#26 - 67/SOL
+Pool: E9oGC72mZWYqmzR5ggB9DAoGyRssR3uhFWHG1L75RZve
+DEX: Raydium CPMM
+Rank: 26
+Main Token: 67COIN (67)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-07-10T18:48:30
+----------------------------------------
+
+#27 - Tokabu/SOL
+Pool: Ekv9HdumWqnXZgq5G6ge6bk1ZRHKXYC2WnSFL94sQmLJ
+DEX: PumpSwap
+Rank: 27
+Main Token: The Spirit of Gambling (Tokabu)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-06-07T00:30:22
+----------------------------------------
+
+#28 - lolcoin/SOL
+Pool: G4QdcJ8PKMSUWKGoHWozzQvqcD5KxS15pCBnteP79N5B
+DEX: PumpSwap
+Rank: 28
+Main Token: Worlds First Memecoin (lolcoin)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-06-19T23:14:08
+----------------------------------------
+
+#29 - nub/SOL
+Pool: 83G6VzJzLRCnHBsLATj94VCpRimyyqwuN6ZfL11McADL
+DEX: Raydium
+Rank: 29
+Main Token: nubcat (nub)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2024-03-25T02:21:49
+----------------------------------------
+
+#30 - BANANA/SOL
+Pool: DPRfTqJdMGZm6Rb9cJFyo5E1JLYgNhePFYueTd8i3P51
+DEX: PumpSwap
+Rank: 30
+Main Token: Banana Chain (BANANA)
+Side Token: Wrapped SOL (SOL)
+Fee: 0%
+Criado em: 2025-08-19T18:33:28
+----------------------------------------
+

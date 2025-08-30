@@ -1,0 +1,101 @@
+{
+  "data": {
+    "audit": {
+      "buy_tax": {
+        "max": 0,
+        "min": 0,
+        "status": "unknown"
+      },
+      "is_blacklisted": "no",
+      "is_contract_renounced": "yes",
+      "is_honeypot": "no",
+      "is_mintable": "no",
+      "is_open_source": "yes",
+      "is_potentially_scam": "no",
+      "is_proxy": "unknown",
+      "sell_tax": {
+        "max": 0,
+        "min": 0,
+        "status": "unknown"
+      },
+      "slippage_modifiable": "no",
+      "updated_at": "2025-04-02T22:20:08.559Z"
+    },
+    "info": {
+      "createdAt": "2024-09-02T23:35:18.769Z",
+      "decimals": 6,
+      "description": "The Official Dwog of Solana",
+      "logo": "https://www.dextools.io/resources/tokens/logos/solana/egy3LC9ndbxo8LzL8W3s8FzwS3H6gT7t73uUP2Mpump.jpg?1731528659734",
+      "name": "DWOG",
+      "socialInfo": {
+        "bitbucket": "",
+        "discord": "",
+        "email": "",
+        "facebook": "",
+        "github": "",
+        "instagram": "",
+        "linkedin": "",
+        "medium": "",
+        "reddit": "",
+        "slack": "",
+        "telegram": "https://t.me/dwogsolcto",
+        "tiktok": "",
+        "twitter": "https://x.com/dwogonsolcto",
+        "twitterPost": "",
+        "website": "https://dwogsolcto.xyz/",
+        "youtube": ""
+      },
+      "symbol": "DWOG"
+    },
+    "metrics": {
+      "circulating_supply": 998956626.847677,
+      "dex_info": {
+        "factory": "675kpx9mhtjs2zt1qfr1nyhuzelxfqm9h24wfsut1mp8",
+        "name": "Raydium"
+      },
+      "fdv": 82095.04258214604,
+      "holders_count": 299,
+      "liquidity_usd": 40818.18393845167,
+      "mcap": 82091.49550043297,
+      "pool_address": "Ea71xfi6zeugQrC1vt7W9a4DZwMHtbFcNMPZsyk9QiM1",
+      "total_supply": 998999790.646334,
+      "transactions": 0,
+      "volume_1h_usd": 626.0120808911281,
+      "volume_24h_usd": 104371.82348225673,
+      "volume_6h_usd": 3204.3058127213862
+    },
+    "price": {
+      "change1h": -2.502549380172747,
+      "change24h": -28.826362153244744,
+      "change6h": -13.728164190961934,
+      "current": 8.217723702327513e-05,
+      "price1hAgo": 8.428654954652058e-05,
+      "price24hAgo": 0.00011546021744766209
+    },
+    "score": {
+      "downvotes": 0,
+      "total": 86,
+      "upvotes": 0
+    },
+    "tax_analysis": {
+      "buy_tax_info": {
+        "assessment": "✅ Sem taxa de buy (0%)",
+        "max_percent": 0,
+        "min_percent": 0,
+        "status": "unknown"
+      },
+      "contract_renounced": "yes",
+      "is_honeypot": "no",
+      "overall_assessment": "✅ Token sem taxas - Excelente para trading",
+      "sell_tax_info": {
+        "assessment": "✅ Sem taxa de sell (0%)",
+        "max_percent": 0,
+        "min_percent": 0,
+        "status": "unknown"
+      },
+      "slippage_modifiable": "no"
+    }
+  },
+  "success": true,
+  "tokenAddress": "egy3LC9ndbxo8LzL8W3s8FzwS3H6gT7t73uUP2Mpump"
+}

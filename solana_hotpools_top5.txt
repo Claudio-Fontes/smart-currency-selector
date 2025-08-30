@@ -1,0 +1,49 @@
+🔥 TOP 5 HOT POOLS - SOLANA
+Generated: 2025-08-29 17:12:09
+============================================================
+
+# 1 - TROLL/SOL
+Pool Address: 4w2cysotX6czaUGmmWg13hDpY4QEMG2CzeKYEQyK9Ama
+DEX: PumpSwap
+Main Token: TROLL (TROLL)
+Side Token: Wrapped SOL (SOL)
+Rank: 1
+Created: 2025-04-20T18:30:29
+--------------------------------------------------
+
+# 2 - SPARK/SOL
+Pool Address: 3mgxf9VVDd82E75bovuAJPS1wYmJoZCAo4MB6zpQDjnv
+DEX: PumpSwap
+Main Token: Illusion of Life (SPARK)
+Side Token: Wrapped SOL (SOL)
+Rank: 2
+Created: 2025-08-05T07:55:42
+--------------------------------------------------
+
+# 3 - SAROS/USDC
+Pool Address: 7EFmig3Jb9j1kJ7ppaUs5iY8P5pBnRdQXUR4q9vSCY37
+DEX: Saros
+Main Token: Saros (SAROS)
+Side Token: USD Coin (USDC)
+Rank: 3
+Created: 2024-01-19T09:36:00
+--------------------------------------------------
+
+# 4 - USDUC/SOL
+Pool Address: BAX9M9a5FVy5cNiewwnuwkVDzhSg9psZnb4fJ9r677tN
+DEX: PumpSwap
+Main Token: unstable coin (USDUC)
+Side Token: Wrapped SOL (SOL)
+Rank: 4
+Created: 2025-05-18T22:24:26
+--------------------------------------------------
+
+# 5 - WOJAK/SOL
+Pool Address: 6GDrReNVfyjQDCuGMrKdG2JU7Uj8NCvBt2ukaL2mDj1L
+DEX: Raydium
+Main Token: Wojak (WOJAK)
+Side Token: Wrapped SOL (SOL)
+Rank: 5
+Created: 2024-05-09T05:06:18
+--------------------------------------------------
+

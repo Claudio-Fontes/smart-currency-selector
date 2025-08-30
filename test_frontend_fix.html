@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Tax Display Fix</title>
+</head>
+<body>
+    <h1>🧪 Teste da Correção de Exibição de Taxas</h1>
+    
+    <h2>Cenários testados:</h2>
+    
+    <h3>1. Valores null (antes da correção):</h3>
+    <code>
+        buyTax: null → Exibia "null%"<br>
+        sellTax: null → Exibia "null%"
+    </code>
+    
+    <h3>2. Valores null (após a correção):</h3>
+    <code>
+        buyTax: null → Deve exibir "0%"<br>
+        sellTax: null → Deve exibir "0%"
+    </code>
+    
+    <h3>3. Lógica implementada:</h3>
+    <pre>
+const buyTax = taxAnalysis.buy_tax_info?.max_percent ?? audit.buy_tax?.max;
+return buyTax !== null && buyTax !== undefined ? `${buyTax}%` : '0%';
+    </pre>
+    
+    <h3>4. Teste das funções auxiliares:</h3>
+    <pre>
+getTaxRiskLevel(null, null) → 'excellent' (0% total)
+getTaxRiskText(null, null) → 'No taxes - Excellent for trading'
+    </pre>
+    
+    <h2>✅ Correções Aplicadas:</h2>
+    <ul>
+        <li>✅ Tratamento de valores null/undefined na exibição das taxas</li>
+        <li>✅ Uso do operador nullish coalescing (??)</li>
+        <li>✅ Verificação explícita de null e undefined</li>
+        <li>✅ Conversão para parseFloat nas funções de cálculo</li>
+        <li>✅ Fallback para "0%" quando dados não disponíveis</li>
+    </ul>
+    
+    <h2>📱 Como testar:</h2>
+    <ol>
+        <li>Recarregue o frontend (Ctrl+F5)</li>
+        <li>Selecione um token na lista</li>
+        <li>Verifique se as taxas mostram "0%" ao invés de "null%"</li>
+        <li>Verifique se o indicador de risco mostra "Excellent for trading"</li>
+    </ol>
+    
+    <script>
+        // Simulação do comportamento corrigido
+        function testTaxDisplay() {
+            const testCases = [
+                { buyTax: null, sellTax: null },
+                { buyTax: undefined, sellTax: undefined },
+                { buyTax: 0, sellTax: 0 },
+                { buyTax: 5, sellTax: 3 },
+                { buyTax: null, sellTax: 10 }
+            ];
+            
+            console.log("🧪 Testando correção de exibição de taxas:");
+            
+            testCases.forEach((test, index) => {
+                const buyDisplay = test.buyTax !== null && test.buyTax !== undefined ? `${test.buyTax}%` : '0%';
+                const sellDisplay = test.sellTax !== null && test.sellTax !== undefined ? `${test.sellTax}%` : '0%';
+                
+                console.log(`Teste ${index + 1}:`);
+                console.log(`  Input: buyTax=${test.buyTax}, sellTax=${test.sellTax}`);
+                console.log(`  Output: Buy=${buyDisplay}, Sell=${sellDisplay}`);
+            });
+        }
+        
+        testTaxDisplay();
+    </script>
+</body>
+</html>
