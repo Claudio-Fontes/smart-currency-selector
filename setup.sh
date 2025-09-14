@@ -31,7 +31,7 @@ if [ ! -f ".env" ]; then
     echo "📝 Creating .env file..."
     cat > .env << EOL
 # DEXTools API Configuration
-DEXTOOLS_API_KEY=jjbT6DU0xm26IQRHItXvI8EEUsRp9P1A7uSoGjB3
+DEXTOOLS_API_KEY=your_api_key_here
 DEXTOOLS_BASE_URL=https://public-api.dextools.io/standard/v2
 
 # Server Configuration
