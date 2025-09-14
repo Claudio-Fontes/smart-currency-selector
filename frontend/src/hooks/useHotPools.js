@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { hotPoolsAPI } from '../services/api';
 
 // Simple, stable hook for hot pools
-export const useHotPools = (limit = 30) => {
+export const useHotPools = (limit = 50) => {
   const [pools, setPools] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

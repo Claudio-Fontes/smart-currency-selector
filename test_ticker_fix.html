@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste do Ticker</title>
+    <style>
+        body { margin: 0; padding: 50px 0; background: #1a1a1a; }
+        
+        .ticker-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 45px;
+            background: #000;
+            overflow: hidden;
+            border-bottom: 2px solid #333;
+        }
+        
+        .ticker-content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            animation: scroll-left 20s linear infinite;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            padding: 0 20px;
+            margin: 0 10px;
+            background: #222;
+            border-radius: 20px;
+            color: white;
+            white-space: nowrap;
+        }
+        
+        .ticker-item.suggested {
+            background: linear-gradient(45deg, #ff6b6b, #ffd700) !important;
+            border: 2px solid #ffd700;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .status {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticker-container">
+        <div class="ticker-content" id="ticker"></div>
+    </div>
+    
+    <div class="status" id="status">
+        Carregando...
+    </div>
+    
+    <script>
+        // Simular tokens
+        const tokens = [
+            { name: 'BTC', suggested: false },
+            { name: 'ETH', suggested: true },  // Este deve brilhar
+            { name: 'SOL', suggested: false },
+            { name: 'DOGE', suggested: true }, // Este deve brilhar
+            { name: 'ADA', suggested: false }
+        ];
+        
+        function createTicker() {
+            const ticker = document.getElementById('ticker');
+            
+            // Criar HTML dos tokens
+            let html = '';
+            tokens.forEach(token => {
+                html += `<div class="ticker-item ${token.suggested ? 'suggested' : ''}">
+                    ${token.suggested ? '⭐' : '🪙'} ${token.name}
+                </div>`;
+            });
+            
+            // Duplicar para loop contínuo
+            ticker.innerHTML = html + html;
+            
+            // Atualizar status
+            const suggestedCount = tokens.filter(t => t.suggested).length;
+            document.getElementById('status').innerHTML = `
+                ✅ Ticker criado<br>
+                📊 ${tokens.length} tokens<br>
+                ⭐ ${suggestedCount} sugeridos (devem brilhar)<br>
+                <br>
+                Se ETH e DOGE estão brilhando = ✅ Funcionando<br>
+                Se só brilham no final = ❌ Bug persiste
+            `;
+        }
+        
+        // Criar ticker quando página carregar
+        window.onload = createTicker;
+    </script>
+</body>
+</html>

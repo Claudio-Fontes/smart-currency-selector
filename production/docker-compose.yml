@@ -1,0 +1,105 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  database:
+    image: postgres:15-alpine
+    container_name: smart-currency-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: smart_currency
+      POSTGRES_USER: ${DB_USER:-admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secure_password}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    networks:
+      - smart-currency-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-admin} -d smart_currency"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Backend Python API
+  backend:
+    build:
+      context: ../
+      dockerfile: production/dockerfiles/Dockerfile.backend
+    container_name: smart-currency-backend
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://${DB_USER:-admin}:${DB_PASSWORD:-secure_password}@database:5432/smart_currency
+      - FLASK_ENV=production
+      - PYTHONPATH=/app
+      - DEXTOOLS_API_KEY=${DEXTOOLS_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - SOLANA_PRIVATE_KEY=${SOLANA_PRIVATE_KEY}
+      - SOLANA_RPC_URL=${SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}
+      - PROFIT_TARGET_PERCENTAGE=${PROFIT_TARGET_PERCENTAGE:-20}
+      - STOP_LOSS_PERCENTAGE=${STOP_LOSS_PERCENTAGE:-10}
+    ports:
+      - "5000:5000"
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - smart-currency-network
+    volumes:
+      - app_logs:/app/logs
+
+  # Frontend React App
+  frontend:
+    build:
+      context: ../
+      dockerfile: production/dockerfiles/Dockerfile.frontend
+    container_name: smart-currency-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - smart-currency-network
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:5000
+
+  # Trading Monitor
+  monitor:
+    build:
+      context: ../
+      dockerfile: production/dockerfiles/Dockerfile.monitor
+    container_name: smart-currency-monitor
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgresql://${DB_USER:-admin}:${DB_PASSWORD:-secure_password}@database:5432/smart_currency
+      - PYTHONPATH=/app
+      - DEXTOOLS_API_KEY=${DEXTOOLS_API_KEY}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - TELEGRAM_CHAT_ID=${TELEGRAM_CHAT_ID}
+      - SOLANA_PRIVATE_KEY=${SOLANA_PRIVATE_KEY}
+      - SOLANA_RPC_URL=${SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}
+      - PROFIT_TARGET_PERCENTAGE=${PROFIT_TARGET_PERCENTAGE:-20}
+      - STOP_LOSS_PERCENTAGE=${STOP_LOSS_PERCENTAGE:-10}
+      - AUTO_TRADING_ENABLED=${AUTO_TRADING_ENABLED:-false}
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - smart-currency-network
+    volumes:
+      - app_logs:/app/logs
+
+volumes:
+  postgres_data:
+    driver: local
+  app_logs:
+    driver: local
+
+networks:
+  smart-currency-network:
+    driver: bridge

@@ -9,6 +9,13 @@ def load_settings() -> Dict[str, Any]:
             'api_key': os.getenv('DEXTOOLS_API_KEY'),
             'base_url': os.getenv('DEXTOOLS_BASE_URL', 'https://public-api.dextools.io/v2')
         },
+        'postgres': {
+            'host': os.getenv('POSTGRES_HOST', 'localhost'),
+            'port': int(os.getenv('POSTGRES_PORT', 5432)),
+            'user': os.getenv('POSTGRES_USER'),
+            'password': os.getenv('POSTGRES_PASSWORD'),
+            'database': os.getenv('POSTGRES_DB')
+        },
         'chains': {
             "1": "eth",
             "2": "bsc", 

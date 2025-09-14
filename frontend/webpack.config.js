@@ -31,9 +31,9 @@ module.exports = {
   ],
   devServer: {
     static: path.resolve(__dirname, 'dist'),
-    port: 3000,
-    hot: false,
-    liveReload: false,
+    port: 3002,
+    hot: true,
+    liveReload: true,
     proxy: {
       '/api': {
         target: 'http://localhost:8000',

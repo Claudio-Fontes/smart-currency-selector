@@ -1,0 +1,141 @@
+/* Ticker Bar - Estilo DexTools */
+.ticker-container {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(90deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    border-bottom: 1px solid #333;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.ticker-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    animation: scroll-left 120s linear infinite;
+    white-space: nowrap;
+}
+
+.ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.ticker-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+    border-color: rgba(102, 126, 234, 0.5);
+}
+
+.ticker-emoji {
+    font-size: 16px;
+    margin-right: 4px;
+}
+
+.ticker-symbol {
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ticker-price {
+    color: #a0a0a0;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+}
+
+.ticker-change {
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.ticker-change.positive {
+    color: #00ff88;
+}
+
+.ticker-change.negative {
+    color: #ff4757;
+}
+
+.ticker-value {
+    color: #ffd700;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.ticker-separator {
+    color: #666;
+    margin: 0 8px;
+    font-size: 12px;
+}
+
+/* Animação de scroll da direita para esquerda */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100vw);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* Efeito de fade nas bordas */
+.ticker-container::before,
+.ticker-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50px;
+    z-index: 101;
+    pointer-events: none;
+}
+
+.ticker-container::before {
+    left: 0;
+    background: linear-gradient(to right, #1a1a1a, transparent);
+}
+
+.ticker-container::after {
+    right: 0;
+    background: linear-gradient(to left, #1a1a1a, transparent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .ticker-container {
+        height: 45px;
+    }
+    
+    .ticker-item {
+        height: 32px;
+        font-size: 12px;
+        gap: 6px;
+        margin-right: 20px;
+        padding: 0 12px;
+    }
+    
+    .ticker-symbol {
+        display: none; /* Esconder símbolo em telas pequenas */
+    }
+}
+
+/* Pausa da animação ao hover sobre o container */
+.ticker-container:hover .ticker-content {
+    animation-play-state: paused;
+}

@@ -1,17 +1,18 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+// Use relative URLs to go through webpack proxy
+const API_BASE_URL = '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 30000, // Increased timeout for heavy operations
+  timeout: 60000, // 60 second timeout for market intelligence
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 export const hotPoolsAPI = {
-  getHotPools: async (limit = 30) => {
+  getHotPools: async (limit = 50) => {
     try {
       const response = await api.get(`/hot-pools?limit=${limit}`);
       return response.data;
@@ -121,6 +122,121 @@ export const analyzerAPI = {
       return response.data;
     } catch (error) {
       console.error('Error updating criteria:', error);
+      throw error;
+    }
+  }
+};
+
+export const marketIntelligenceAPI = {
+  getMarketIntelligence: async (tokenAddress) => {
+    try {
+      console.log(`🔄 Fetching market intelligence for: ${tokenAddress}`);
+      const response = await api.get(`/market-intelligence/${tokenAddress}`);
+      
+      if (response.data && response.data.success) {
+        console.log('✅ Market intelligence fetched successfully');
+        return response.data;
+      } else {
+        throw new Error('Invalid response format');
+      }
+    } catch (error) {
+      console.error('❌ Error fetching market intelligence:', error);
+      throw error;
+    }
+  },
+
+  // Fast loading - get basic data quickly
+  getMarketIntelligenceFast: async (tokenAddress) => {
+    try {
+      console.log(`🚀 Fetching FAST market intelligence for: ${tokenAddress}`);
+      const response = await api.get(`/market-intelligence-fast/${tokenAddress}`, {
+        timeout: 15000 // Short timeout for fast endpoint
+      });
+      
+      if (response.data && response.data.success) {
+        console.log('⚡ Fast market intelligence fetched successfully');
+        return response.data;
+      } else {
+        throw new Error('Invalid response format');
+      }
+    } catch (error) {
+      console.error('❌ Error fetching fast market intelligence:', error);
+      throw error;
+    }
+  },
+
+  // Enhanced data - for background loading
+  getMarketIntelligenceEnhanced: async (tokenAddress) => {
+    try {
+      console.log(`🔍 Fetching ENHANCED market intelligence for: ${tokenAddress}`);
+      const response = await api.get(`/market-intelligence/enhanced/${tokenAddress}`, {
+        timeout: 30000
+      });
+      
+      if (response.data && response.data.success) {
+        console.log('🎯 Enhanced market intelligence fetched successfully');
+        return response.data;
+      } else {
+        throw new Error('Invalid response format');
+      }
+    } catch (error) {
+      console.error('❌ Error fetching enhanced market intelligence:', error);
+      throw error;
+    }
+  },
+
+  // Metrics data - for background loading
+  getMarketIntelligenceMetrics: async (tokenAddress) => {
+    try {
+      console.log(`📊 Fetching METRICS for: ${tokenAddress}`);
+      const response = await api.get(`/market-intelligence/metrics/${tokenAddress}`, {
+        timeout: 25000
+      });
+      
+      if (response.data && response.data.success) {
+        console.log('📈 Metrics fetched successfully');
+        return response.data;
+      } else {
+        throw new Error('Invalid response format');
+      }
+    } catch (error) {
+      console.error('❌ Error fetching metrics:', error);
+      throw error;
+    }
+  }
+};
+
+export const tradingAPI = {
+  getStatistics: async () => {
+    try {
+      console.log('🔄 Fetching trading statistics...');
+      const response = await api.get('/trades/statistics');
+      
+      if (response.data && response.data.success) {
+        console.log('✅ Trading statistics fetched successfully');
+        return response.data;
+      } else {
+        throw new Error('Invalid response format');
+      }
+    } catch (error) {
+      console.error('❌ Error fetching trading statistics:', error);
+      throw error;
+    }
+  },
+
+  getPositions: async () => {
+    try {
+      console.log('🔄 Fetching trading positions...');
+      const response = await api.get('/positions');
+      
+      if (response.data && response.data.success) {
+        console.log('✅ Trading positions fetched successfully');
+        return response.data;
+      } else {
+        throw new Error('Invalid response format');
+      }
+    } catch (error) {
+      console.error('❌ Error fetching trading positions:', error);
       throw error;
     }
   }

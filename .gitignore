@@ -61,6 +61,36 @@ Thumbs.db
 *.log
 logs/
 
+# Database files
+*.db
+database.db
+*.sqlite
+*.sqlite3
+
+# Test scripts temporários
+test_*.py
+execute_*.py
+debug_*.py
+vender_*.py
+verificar_*.py
+comprar_*.py
+check_*.py
+fix_*.py
+recalculate_*.py
+diagnose_*.py
+buscar_*.py
+corrigir_*.py
+atualizar_*.py
+analyze_*.py
+quick_*.py
+positions*.py
+
+# Mas manter scripts importantes
+!sync_wallet_*.py
+!start_monitor_*.py
+!monitor_daemon.py
+!configure_clean_logging.py
+
 # Runtime data
 pids
 *.pid

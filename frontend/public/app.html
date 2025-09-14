@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Solana Hot Pools Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-card .value {
+            color: #333;
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .pools-container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pools-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .pools-header h2 {
+            color: #333;
+            font-size: 1.8em;
+        }
+        
+        .refresh-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: transform 0.2s;
+        }
+        
+        .refresh-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .refresh-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .pool-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .pool-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        
+        .pool-card:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.1);
+        }
+        
+        .pool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+        
+        .pool-info h3 {
+            color: #333;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        
+        .pool-info .address {
+            color: #666;
+            font-size: 0.9em;
+            font-family: monospace;
+        }
+        
+        .pool-badge {
+            background: #28a745;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        
+        .pool-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .metric {
+            text-align: center;
+        }
+        
+        .metric-label {
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            color: #333;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .error {
+            background: #dc3545;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔥 Solana Hot Pools Dashboard</h1>
+            <p>Real-time tracking of the hottest liquidity pools on Solana</p>
+        </div>
+        
+        <div class="stats-container">
+            <div class="stat-card">
+                <h3>Active Pools</h3>
+                <div class="value" id="poolCount">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Volume 24h</h3>
+                <div class="value" id="totalVolume">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>Last Update</h3>
+                <div class="value" id="lastUpdate">-</div>
+            </div>
+        </div>
+        
+        <div class="pools-container">
+            <div class="pools-header">
+                <h2>🔥 Hot Pools</h2>
+                <button class="refresh-btn" onclick="fetchPools()">🔄 Refresh</button>
+            </div>
+            <div id="poolsContent">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading hot pools...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_URL = 'http://localhost:8000';
+        
+        async function fetchPools() {
+            const contentDiv = document.getElementById('poolsContent');
+            const refreshBtn = document.querySelector('.refresh-btn');
+            
+            // Disable refresh button and show loading
+            refreshBtn.disabled = true;
+            contentDiv.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading hot pools...</p></div>';
+            
+            try {
+                const response = await fetch(`${API_URL}/api/hot-pools?limit=10`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                displayPools(data.pools || []);
+                updateStats(data.pools || []);
+                
+            } catch (error) {
+                console.error('Error fetching pools:', error);
+                contentDiv.innerHTML = `
+                    <div class="error">
+                        ❌ Error loading pools: ${error.message}
+                        <br><br>
+                        Make sure the backend server is running on port 8000.
+                    </div>
+                `;
+            } finally {
+                refreshBtn.disabled = false;
+            }
+        }
+        
+        function displayPools(pools) {
+            const contentDiv = document.getElementById('poolsContent');
+            
+            if (!pools || pools.length === 0) {
+                contentDiv.innerHTML = '<div class="loading">No hot pools found at the moment.</div>';
+                return;
+            }
+            
+            const poolsHTML = pools.map(pool => `
+                <div class="pool-card">
+                    <div class="pool-header">
+                        <div class="pool-info">
+                            <h3>${pool.name || 'Unknown Pool'}</h3>
+                            <div class="address">${pool.address ? pool.address.slice(0, 8) + '...' + pool.address.slice(-8) : 'N/A'}</div>
+                        </div>
+                        <div class="pool-badge">HOT 🔥</div>
+                    </div>
+                    <div class="pool-metrics">
+                        <div class="metric">
+                            <div class="metric-label">Volume 24h</div>
+                            <div class="metric-value">$${formatNumber(pool.volume24h || 0)}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Liquidity</div>
+                            <div class="metric-value">$${formatNumber(pool.liquidity || 0)}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">Price Change 24h</div>
+                            <div class="metric-value" style="color: ${pool.priceChange24h >= 0 ? '#28a745' : '#dc3545'}">
+                                ${pool.priceChange24h >= 0 ? '+' : ''}${(pool.priceChange24h || 0).toFixed(2)}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            contentDiv.innerHTML = `<div class="pool-grid">${poolsHTML}</div>`;
+        }
+        
+        function updateStats(pools) {
+            document.getElementById('poolCount').textContent = pools.length;
+            
+            const totalVolume = pools.reduce((sum, pool) => sum + (pool.volume24h || 0), 0);
+            document.getElementById('totalVolume').textContent = '$' + formatNumber(totalVolume);
+            
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent = now.toLocaleTimeString();
+        }
+        
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(2) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(2) + 'K';
+            }
+            return num.toFixed(2);
+        }
+        
+        // Fetch pools on page load
+        window.addEventListener('DOMContentLoaded', fetchPools);
+        
+        // Auto-refresh every 30 seconds
+        setInterval(fetchPools, 30000);
+    </script>
+</body>
+</html>

@@ -2,11 +2,18 @@
 
 import os
 import sys
+import logging
 from flask import Flask
 from flask_cors import CORS
 
 # Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# Configurar logging limpo para o backend
+logging.getLogger('werkzeug').setLevel(logging.WARNING)  # Menos logs do Flask
+logging.getLogger('trade.utils.solana_client').setLevel(logging.WARNING)  # Menos logs de saldo
+logging.getLogger('httpx').setLevel(logging.WARNING)
+logging.getLogger('urllib3').setLevel(logging.WARNING)
 
 from backend.api.routes import api
 
@@ -25,7 +32,7 @@ def create_app():
             'message': '🔥 Solana Hot Pools API',
             'version': '1.0.0',
             'endpoints': {
-                '/api/hot-pools': 'GET - Fetch hot pools with optional ?limit parameter',
+                '/api/hot-pools': 'GET - Fetch hot pools with optional ?limit parameter (default: 50)',
                 '/api/token/<address>': 'GET - Get detailed token analysis',
                 '/api/health': 'GET - Health check'
             }

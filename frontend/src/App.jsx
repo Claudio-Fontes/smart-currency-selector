@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import HotPoolsPanel from './components/HotPoolsPanel';
-import LazyTokenDetailPanel from './components/LazyTokenDetailPanel';
-import IsolatedPanel from './components/IsolatedPanel';
+import HotOpportunitiesPanel from './components/HotOpportunitiesPanel';
+import MarketIntelligencePanel from './components/MarketIntelligencePanel';
+import TradingPerformancePanel from './components/TradingPerformancePanel';
+import TickerBar from './components/TickerBar';
 import ErrorBoundary from './components/ErrorBoundary';
 import { useHotPools, useTokenAnalysis } from './hooks/useHotPools';
+import usePositions from './hooks/usePositions';
 import './styles/App.css';
+import './styles/panels.css';
 
+// Force webpack recompilation with updated API and CSS - DEBUG STICKER VERSION
 const App = () => {
   const [selectedPool, setSelectedPool] = useState(null);
   const [poolsKey, setPoolsKey] = useState(`pools-${Date.now()}`);
   const [tokenKey, setTokenKey] = useState(null);
-  const poolLimit = 30;
+  const poolLimit = 50;
   
   const { pools, loading: poolsLoading, error: poolsError, refetch } = useHotPools(poolLimit);
   const { analysis, loading: analysisLoading, error: analysisError, fetchTokenAnalysis, clearAnalysis } = useTokenAnalysis();
+  const { positions } = usePositions(60000); // Para o ticker bar
 
   // Debug logging
   console.log('🏊 App state - pools:', pools?.length || 0, 'loading:', poolsLoading, 'error:', poolsError);
@@ -42,12 +47,13 @@ const App = () => {
     
     console.log('📋 App: Token address to analyze:', pool.mainToken?.address);
     
-    // Small delay to prevent race conditions
-    setTimeout(() => {
-      if (pool.mainToken && pool.mainToken.address) {
-        fetchTokenAnalysis(pool.mainToken.address);
-      }
-    }, 100);
+    // Disabled automatic token analysis to prevent timeouts
+    // User can manually request token analysis if needed
+    // setTimeout(() => {
+    //   if (pool.mainToken && pool.mainToken.address) {
+    //     fetchTokenAnalysis(pool.mainToken.address);
+    //   }
+    // }, 100);
   };
 
   const handleRefresh = () => {
@@ -55,12 +61,12 @@ const App = () => {
     refetch();
   };
 
-  // Auto-select first pool
-  useEffect(() => {
-    if (pools && pools.length > 0 && !selectedPool && !poolsLoading) {
-      handlePoolSelect(pools[0]);
-    }
-  }, [pools, selectedPool, poolsLoading]);
+  // Disabled auto-select to prevent timeouts
+  // useEffect(() => {
+  //   if (pools && pools.length > 0 && !selectedPool && !poolsLoading) {
+  //     handlePoolSelect(pools[0]);
+  //   }
+  // }, [pools, selectedPool, poolsLoading]);
 
   const formatNumber = (num) => {
     if (!num || isNaN(num)) return '0';
@@ -75,54 +81,64 @@ const App = () => {
       <header className="header">
         <div className="header-content">
           <div className="logo">
-            🔥 Solana Hot Pools Dashboard
+            🚀 Solana Trading Intelligence Dashboard
           </div>
           <div className="stats">
             <div className="stat-item">
-              📊 {pools ? pools.length : 0} Pools Loaded
+              🔥 {pools ? pools.length : 0} Hot Opportunities
             </div>
             <div className="stat-item">
-              🏆 Top {poolLimit} Ranking
+              📊 Advanced Analytics
             </div>
             <div className="stat-item">
-              ⚡ Real-time Data
+              ⚡ Real-time Intelligence
+            </div>
+            <div className="stat-item">
+              🎯 Performance Tracking
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Ticker Bar - Posições rolando */}
+      <ErrorBoundary>
+        <TickerBar positions={positions} />
+      </ErrorBoundary>
+
+      {/* Main Content - Revolutionary 3 Panel Layout */}
       <main className="main-content">
-        <div className="pools-panel-wrapper" style={{ flex: '0 0 45%', minWidth: '450px' }}>
+        <div className="opportunities-panel-wrapper" style={{ flex: '1', minWidth: '350px' }}>
           <ErrorBoundary>
-            <IsolatedPanel
-              panelKey={poolsKey}
+            <HotOpportunitiesPanel
+              pools={pools}
               loading={poolsLoading}
               error={poolsError}
-            >
-              <HotPoolsPanel
-                pools={pools}
-                loading={poolsLoading}
-                error={poolsError}
-                onPoolSelect={handlePoolSelect}
-                selectedPool={selectedPool}
-                onRefresh={handleRefresh}
-              />
-            </IsolatedPanel>
-          </ErrorBoundary>
-        </div>
-
-        <div className="token-detail-wrapper" style={{ flex: '0 0 55%', minWidth: '500px' }}>
-          <ErrorBoundary>
-            <LazyTokenDetailPanel
-              analysis={analysis}
-              loading={analysisLoading}
-              error={analysisError}
-              tokenKey={tokenKey}
+              onPoolSelect={handlePoolSelect}
+              selectedPool={selectedPool}
+              onRefresh={handleRefresh}
             />
           </ErrorBoundary>
         </div>
+
+        <div className="intelligence-panel-wrapper" style={{ flex: '1', minWidth: '400px' }}>
+          <ErrorBoundary>
+            <MarketIntelligencePanel
+              selectedPool={selectedPool}
+            />
+          </ErrorBoundary>
+        </div>
+
+        <div className="performance-panel-wrapper" style={{ flex: '1', minWidth: '400px' }}>
+          <ErrorBoundary>
+            <TradingPerformancePanel />
+          </ErrorBoundary>
+        </div>
       </main>
+
+      {/* Claude Code Sticker */}
+      <div className="claude-sticker">
+        🤖 <span className="claude-logo">Claude Code</span>
+      </div>
     </div>
   );
 };

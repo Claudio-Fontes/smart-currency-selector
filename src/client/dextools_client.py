@@ -30,7 +30,7 @@ class DEXToolsClient:
 
     def get_token_pools(self, chain: str, token_address: str) -> Optional[Dict[str, Any]]:
         """Busca pools do token e retorna a com maior liquidez"""
-        url = f"{self.base_url}/token/{chain}/{token_address}/pools?sort=creationTime&order=desc&from=2020-01-01T00:00:00.000Z&to=2025-01-01T00:00:00.000Z"
+        url = f"{self.base_url}/token/{chain}/{token_address}/pools?sort=creationTime&order=desc&from=2020-01-01T00:00:00.000Z&to=2026-01-01T00:00:00.000Z"
         try:
             response = self._make_request(url)
             response.raise_for_status()
